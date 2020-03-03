@@ -9,10 +9,112 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 library(readxl)
 library(lubridate)
+library(fs)
 library(tidyverse)
 ```
 
 ```{r}
+int <- read_xlsx("data/fedinterest.xlsx")
+```
 
+```{r}
+# Having troubles adding a vertical line with geom_vline because the observation
+# is cast as a date. I don't want to figure it out right now, but I'm sure it can
+# be fixed.
+
+plot1 <- ggplot(int, aes(x = observation_date, y = rate)) +
+  geom_line() +
+  labs(title = "Key Interest Rate of the Central Bank of Russia",
+       subtitle = "Sharp increase in 2014 marks key monetery measure taken by central bank",
+       x = "Observation Date",
+       y = "Rate")
+```
+
+```{r}
+pdf("plot1.pdf")
+plot1
+dev.off()
+```
+
+```{r}
+gdp <- read_xlsx("data/wbgdp.xlsx")
+```
+
+```{r}
+# Can confirm, geom_vline works, don't gaslight yourself. I erased it later.
+
+plot2 <- ggplot(gdp, aes(x = Year, y = GDP)) +
+  geom_line() +
+  labs(title = "Annual GDP of the Russian Federation",
+       subtitle = "2014-17 contraction slighly better than 2008-09, but prolonged",
+       x = "Year",
+       y = "GDP")
+```
+
+```{r}
+pdf("plot2.pdf")
+plot2
+dev.off()
+```
+
+```{r}
+mil <- read_xlsx("data/wbmilspend.xlsx")
+```
+
+```{r}
+plot3 <- ggplot(mil, aes(x = Year, y = MilSpend)) +
+  geom_line() +
+  labs(x = "Year",
+       y = "Military Spending",
+       title = "Military Spending of the Russian Federation",
+       subtitle = "Spending shown as percentage of GDP")
+```
+
+```{r}
+pdf("plot3.pdf")
+plot3
+dev.off()
+```
+
+```{r}
+pop <- read_xlsx("data/wbpopulation.xlsx")
+```
+
+```{r}
+plot4 <- ggplot(pop, aes(x = Year, y = Population)) +
+  geom_line() +
+  labs(title = "Population of the Russian Federation")
+```
+
+```{r}
+pdf("plot4.pdf")
+plot4
+dev.off()
+```
+
+```{r}
+plot5 <- ggplot(pop, aes(x = Year, y = Population)) +
+  geom_line() +
+  labs(title = "Population of the Russian Federation") +
+  expand_limits(y = 0)
+```
+
+```{r}
+pdf("plot5.pdf")
+plot5
+dev.off()
+```
+
+```{r}
+pov <- read_xlsx("data/wbpoverty.xlsx")
+```
+
+```{r}
+plot6 <- ggplot(pov, aes(x = Year, y = POV)) +
+  geom_line() +
+  labs(title = "Percentage of Russian Population Living Below Poverty Line",
+       subtitle = "Poverty line as define by the Russian government",
+       x = "Year",
+       y = "Poverty Rate")
 ```
 
