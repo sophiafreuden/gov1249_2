@@ -1,0 +1,18 @@
+---
+title: "gov1249_2"
+author: "Sophia Freuden"
+date: "3/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(readxl)
+library(lubridate)
+library(tidyverse)
+```
+
+```{r}
+
+```
+
